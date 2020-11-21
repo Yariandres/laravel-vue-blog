@@ -23,3 +23,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //1st I created a a reute to hit
 Route::get('/items', [ItemController::class, 'index']);
+
+// 3rd create a prefix route = api/items
+Route::prefix('/item')->group( function () {
+    // we prefixed it so the route = api/items/store
+    Route::post('/store', [ItemController::class, 'store']);
+    // route = api/items/1
+    Route::put('/{id}', [ItemController::class, 'update']);
+    // route = api/items/1 to delete
+    Route::delete('/{id}', [ItemController::class, 'destroy']);
+});
+
